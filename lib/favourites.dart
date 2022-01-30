@@ -37,7 +37,6 @@ class _FavouritesState extends State<Favourites> {
       Map result = jsonDecode(value.body);
       image = result['photos'];
     });
-    print(image);
   }
 
   fetchVideoAPI() async {
@@ -82,9 +81,9 @@ class _FavouritesState extends State<Favourites> {
           color: Colors.black,
           child: ListView(
             shrinkWrap: true,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Row(
@@ -101,7 +100,7 @@ class _FavouritesState extends State<Favourites> {
                             primary: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        child: Text("photos")),
+                        child: const Text("photos")),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 60.0),
@@ -115,7 +114,7 @@ class _FavouritesState extends State<Favourites> {
                             primary: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        child: Text("videos")),
+                        child: const Text("videos")),
                   )
                 ],
               ),
@@ -132,7 +131,7 @@ class _FavouritesState extends State<Favourites> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               isImage
@@ -141,10 +140,10 @@ class _FavouritesState extends State<Favourites> {
                           Future.delayed(const Duration(milliseconds: 2000)),
                       builder: (context, snapshot) {
                         return ListView.builder(
-                            padding: EdgeInsets.only(left: 30, right: 30),
+                            padding: const EdgeInsets.only(left: 30, right: 30),
                             itemCount: context.read<HeartCount>().likes.length,
                             shrinkWrap: true,
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -240,7 +239,7 @@ class _FavouritesState extends State<Favourites> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   )
                                 ],
@@ -252,10 +251,11 @@ class _FavouritesState extends State<Favourites> {
                           Future.delayed(const Duration(milliseconds: 2000)),
                       builder: (context, snapshot) {
                         return ListView.builder(
-                            padding: EdgeInsets.only(left: 30, right: 30),
-                            itemCount: widget.image.length,
+                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            itemCount:
+                                context.read<HeartCount>().videos1.length,
                             shrinkWrap: true,
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -351,7 +351,7 @@ class _FavouritesState extends State<Favourites> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   )
                                 ],

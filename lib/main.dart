@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:http/http.dart' as http;
@@ -62,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
       Map result = jsonDecode(value.body);
       image = result['photos'];
     });
-    print(image);
   }
 
   fetchVideoAPI() async {
@@ -107,9 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.black,
           child: ListView(
             shrinkWrap: true,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Row(
@@ -126,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             primary: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        child: Text("photos")),
+                        child: const Text("photos")),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 60.0),
@@ -140,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             primary: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
-                        child: Text("videos")),
+                        child: const Text("videos")),
                   )
                 ],
               ),
@@ -157,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               isImage
@@ -166,10 +164,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           Future.delayed(const Duration(milliseconds: 2000)),
                       builder: (context, snapshot) {
                         return ListView.builder(
-                            padding: EdgeInsets.only(left: 30, right: 30),
+                            padding: const EdgeInsets.only(left: 30, right: 30),
                             itemCount: image.length,
                             shrinkWrap: true,
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -264,7 +262,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   )
                                 ],
@@ -276,10 +274,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           Future.delayed(const Duration(milliseconds: 2000)),
                       builder: (context, snapshot) {
                         return ListView.builder(
-                            padding: EdgeInsets.only(left: 30, right: 30),
+                            padding: const EdgeInsets.only(left: 30, right: 30),
                             itemCount: image.length,
                             shrinkWrap: true,
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -373,7 +371,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   )
                                 ],
@@ -398,25 +396,21 @@ class HeartCount with ChangeNotifier {
 
   void increment() {
     _likes.add(index1);
-    print(_likes);
     notifyListeners();
   }
 
   void incrementVideo() {
     _videos.add(index1);
-    print(_videos);
     notifyListeners();
   }
 
   void decrement() {
     _likes.remove(index);
-    print(likes);
     notifyListeners();
   }
 
   void decrementVideo() {
-    _videos.add(index1);
-    print(_videos);
+    _videos.remove(index1);
     notifyListeners();
   }
 }

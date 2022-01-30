@@ -36,16 +36,20 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    if (context.read<HeartCount>().likes.contains(widget.index)) {
-      fav = true;
-      print('hi');
+    if (widget.isImage == 'image') {
+      if (context.read<HeartCount>().likes.contains(widget.index)) {
+        fav = true;
+      }
+    } else {
+      if (context.read<HeartCount>().videos1.contains(widget.index)) {
+        fav = true;
+      }
     }
     if (widget.isImage != 'image') {
       _controller = VideoPlayerController.network(
           '${widget.image[widget.index]['video_files'][0]['link']}');
       _initializeVideoPlayerFuture = _controller.initialize();
 
-      print('${widget.image[widget.index]['video_files'][0]['link']}');
     }
   }
 
@@ -123,7 +127,7 @@ class _HomeState extends State<Home> {
                                   child: VideoPlayer(_controller),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                     child: CircularProgressIndicator());
                               }
                             },
@@ -144,13 +148,14 @@ class _HomeState extends State<Home> {
                       child: IconButton(
                         onPressed: () {
                           setState(() {
-                            if (widget.isImage == 'images') {
+                            if (widget.isImage == 'image') {
                               if (fav == false) {
                                 fav = true;
                                 context.read<HeartCount>().index = widget.index;
                                 context.read<HeartCount>().increment();
                               } else {
                                 fav = false;
+                                context.read<HeartCount>().index = widget.index;
                                 context.read<HeartCount>().decrement();
                               }
                             } else {
@@ -165,7 +170,6 @@ class _HomeState extends State<Home> {
                               }
                             }
                           });
-                          print(fav);
                         },
                         icon: fav
                             ? const Icon(
@@ -268,19 +272,21 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.redAccent[700],
-          onPressed: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
-          },
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
-        ),
+        floatingActionButton: widget.isImage == 'image'
+            ? null
+            : FloatingActionButton(
+                backgroundColor: Colors.redAccent[700],
+                onPressed: () {
+                  setState(() {
+                    _controller.value.isPlaying
+                        ? _controller.pause()
+                        : _controller.play();
+                  });
+                },
+                child: Icon(
+                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                ),
+              ),
       ),
     );
   }
